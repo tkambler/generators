@@ -26,19 +26,7 @@ module.exports = class extends Generator {
         
     }
     
-    async prompting() {
-
-        // this.answers = await this.prompt([
-        //     {
-        //         name: 'transpiler',
-        //         message: 'Transpiler',
-        //         type: 'list',
-        //         choices: [
-        //             { name: 'Babel', value: 'babel' },
-        //             { name: 'TypeScript', value: 'ts' },
-        //         ]
-        //     }
-        // ]);
+    prompting() {
         
         this._step1();
         return this._step2();

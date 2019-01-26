@@ -1,7 +1,7 @@
 {
-  "name": "generator-react",
+  "name": "generator-react-ts",
   "version": "1.0.0",
-  "description": "Yeoman generator - React + Babel",
+  "description": "Yeoman generator - React + TypeScript",
   "scripts": {},
   "author": "Tim Ambler <tkambler@gmail.com>",
   "license": "ISC",

@@ -5,6 +5,7 @@ const { spawn } = require('child_process');
 
 const generators = [
     'react',
+    'react-ts',
 ];
 
 const spawnPromise = (cmd, args = [], options = {}) => {
