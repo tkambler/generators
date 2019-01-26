@@ -1,0 +1,42 @@
+{
+  "name": "react-test",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "npm run build",
+    "build": "webpack-cli --progress",
+    "watch": "webpack-dev-server"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "6.26.3",
+    "babel-loader": "7.1.4",
+    "babel-plugin-transform-class-properties": "6.24.1",
+    "babel-plugin-transform-function-bind": "6.22.0",
+    "babel-plugin-transform-object-rest-spread": "6.26.0",
+    "babel-preset-env": "1.6.1",
+    "babel-preset-react": "6.24.1",
+    "clean-webpack-plugin": "^1.0.1",
+    "copy-webpack-plugin": "^4.6.0",
+    "css-loader": "0.28.11",
+    "lodash": "4.17.10",
+    "node-sass": "4.9.0",
+    "opensans-npm-webfont": "1.0.0",
+    "prop-types": "15.6.1",
+    "react": "16.3.2",
+    "react-dom": "16.3.2",
+    "react-router": "4.2.0",
+    "react-router-dom": "4.2.2",
+    "resolve-url-loader": "^3.0.0",
+    "sass-loader": "7.0.1",
+    "style-loader": "0.21.0",
+    "webpack": "4.8.1",
+    "webpack-cli": "^3.2.1",
+    "webpack-dev-server": "^3.1.14"
+  },
+  "dependencies": {
+    "http-server": "^0.11.1"
+  }
+}
