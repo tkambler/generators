@@ -1,9 +1,6 @@
 # Yeoman Generators
 
-- Clone this repo.
-- Run `npm link` within the desire generator folder(s).
+Quickly link all generators by running `./link`. Afterwards, you can run:
 
-For example, to use the React generator, run:
-
-- `cd ./react; npm link`
-- `cd ~; mkdir project; cd project; yo react`
+    yo react
+    // etc...

@@ -1,0 +1,48 @@
+#!/usr/bin/env node
+
+const path = require('path');
+const { spawn } = require('child_process');
+
+const generators = [
+    'react',
+];
+
+const spawnPromise = (cmd, args = [], options = {}) => {
+
+    return new Promise((resolve, reject) => {
+
+        const child = spawn(cmd, args, options);
+
+        child.stdout.on('data', (data) => {
+            console.log(data.toString('utf8'));
+        });
+
+        child.stderr.on('data', (data) => {
+            console.log(data.toString('utf8'));
+        });
+
+        child.on('exit', (code) => {
+            return resolve({
+                code: code
+            });
+        });
+
+    });
+
+};
+
+(async () => {
+
+    for (const generator of generators) {
+
+        await spawnPromise('npm', [
+            'link', '.'
+        ], {
+            cwd: path.resolve(__dirname, generator)
+        });
+
+        console.log(`Linked: ${generator}`);
+
+    }
+
+})();
