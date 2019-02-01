@@ -29,23 +29,6 @@ module.exports = {
         }
     },
     plugins: [
-        // new CleanWebpackPlugin([
-        //     'build'
-        // ], {
-        //     root: __dirname,
-        //     verbose: true,
-        // }),
-        // new CopyWebpackPlugin([
-        //     {
-        //         from: 'node_modules/opensans-npm-webfont/fonts',
-        //         to: 'fonts'
-        //     },
-        //     {
-        //         from: 'public/',
-        //         to: '.'
-        //     },
-        // ], {
-        // }),
         new webpack.DefinePlugin({
             'process.env': {
                 NODE_ENV: JSON.stringify('development')
@@ -54,24 +37,10 @@ module.exports = {
     ],
     module: {
         rules: [
-            // {
-            //     test: /\.js$/,
-            //     exclude: /node_modules/,
-            //     use: [
-            //         {
-            //             loader: 'babel-loader',
-            //             options: {
-            //                 presets: ['env', 'react'],
-            //                 plugins: ['transform-object-rest-spread', 'transform-class-properties', 'transform-function-bind']
-            //             }
-            //         }
-            //     ]
-            // },
             {
                 test: /\.(ts|tsx|js|jsx)$/,
                 loader: 'ts-loader'
             },
-            // { enforce: "pre", test: /\.js$/, loader: "source-map-loader" }
             {
                 test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
                 use: [
