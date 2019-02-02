@@ -15,6 +15,6 @@
     "strict": true,
     "noImplicitAny": false,
     "esModuleInterop": true,
-    "noEmit": true,
+    "outDir": "build",
   }
 }
