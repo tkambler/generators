@@ -1,8 +1,10 @@
 # Yeoman Generators
 
-If you don't already have [Yeoman](https://yeoman.io/) installed, install it: `npm install -g yo`
+A collection of personal [Yeoman](https://yeoman.io/) generators.
 
-Quickly link all generators by running `./link`. Afterwards, you can run:
+- Install Yeoman if necessary: `npm install -g yo`
+- Link the generators: `./link`
 
-    yo react-ts
-    // etc...
+Now you can bootstrap a new project like so:
+
+    mkdir project; cd project; yo react-ts .
