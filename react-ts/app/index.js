@@ -88,19 +88,36 @@ module.exports = class extends Generator {
     }
     
     _step2() {
+
+        const noPrompt = process.argv.includes('--no-prompt');
+        let canContinue;
+
+        if (noPrompt) {
+            canContinue = Promise.resolve({
+                continue: true
+            });
+        } else {
+            canContinue = inquirer.prompt([
+                {
+                    'type': 'confirm',
+                    'name': 'continue',
+                    'message': `Create new project in this folder? If this folder already exists, its contents will be deleted. (${this.destFolder})`,
+                    'default': false
+                }
+            ]);
+        }
         
-        return inquirer.prompt([
-            {
-                'type': 'confirm',
-                'name': 'continue',
-                'message': `Create new project in this folder? If this folder already exists, its contents will be deleted. (${this.destFolder})`,
-                'default': false
-            }
-        ])
+        canContinue
             .then((res) => {
                 
                 if (!res.continue) {
                     return this.onError(`Setup canceled.`);
+                }
+
+                if (noPrompt) {
+                    return {
+                        name: path.basename(this.destFolder)
+                    };
                 }
                 
                 return inquirer.prompt([
