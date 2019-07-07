@@ -172,14 +172,6 @@ module.exports = class extends Generator {
       }
     );
 
-    this.fs.copyTpl(
-      this.templatePath('public/index.html'),
-      path.resolve(this.destFolder, 'public/index.html'),
-      {
-        'projectName': this.projectName
-      }
-    );
-
   }
 
 };
