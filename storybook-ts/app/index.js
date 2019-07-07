@@ -46,12 +46,6 @@ module.exports = class extends Generator {
 
     this.destinationRoot(this.destFolder);
 
-    this.spawnCommandSync('npm', [
-      'install', '@built/react@latest'
-    ], {
-      cwd: this.destFolder
-    });
-
     this.installDependencies({
       'npm': true,
       'yarn': false,
