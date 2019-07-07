@@ -91,7 +91,6 @@ module.exports = class extends Generator {
       'templateFiles': {
         'value': [
           'package.json',
-          'public/index.html'
         ]
       }
     });
