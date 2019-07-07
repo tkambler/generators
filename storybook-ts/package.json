@@ -1,0 +1,24 @@
+{
+  "name": "generator-storybook-ts",
+  "version": "1.0.0",
+  "description": "Yeoman generator - Storybook + TypeScript",
+  "scripts": {},
+  "author": "Tim Ambler <tkambler@gmail.com>",
+  "license": "ISC",
+  "files": [
+    "app"
+  ],
+  "keywords": [
+    "yeoman-generator"
+  ],
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "empty-dir": "^1.0.0",
+    "fs-extra": "^6.0.1",
+    "inquirer": "^5.2.0",
+    "klaw-sync": "^4.0.0",
+    "lodash": "^4.17.10",
+    "yeoman-generator": "^2.0.5",
+    "yosay": "^2.0.2"
+  }
+}
