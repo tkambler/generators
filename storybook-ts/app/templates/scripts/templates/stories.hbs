@@ -1,0 +1,179 @@
+import React from 'react';
+import { configure, storiesOf } from '@storybook/react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import _ from 'lodash';
+import { addDecorator, addParameters } from '@storybook/react';
+import { host } from 'storybook-host';
+import { addReadme } from 'storybook-readme';
+import { themes, create } from '@storybook/theming';
+import s from 'underscore.string';
+import { withKnobs } from '@storybook/addon-knobs/react';
+import graphqlOptions from 'graphql-mocks';
+import { ApolloProvider } from 'react-apollo';
+import { ApolloProvider as ApolloHooksProvider } from 'react-apollo-hooks';
+import createClient from 'apollo-storybook-core';
+
+function apolloStorybookDecorator({
+  typeDefs,
+  mocks,
+  Provider = ApolloProvider,
+  apolloLinkOptions = {},
+  apolloClientOptions = {},
+  links,
+  typeResolvers,
+  context = {},
+  rootValue = {},
+  // cacheOptions is a necessary config parameter because some use cases will require a pre-configured
+  // fragmentMatcher such as IntrospectionFragmentMatcher, etc.
+  cacheOptions = {},
+  resolverValidationOptions
+}) {
+
+  const graphqlClient = createClient({
+    mocks,
+    apolloLinkOptions,
+    apolloClientOptions,
+    typeResolvers,
+    typeDefs,
+    rootValue,
+    context,
+    links,
+    cacheOptions,
+    resolverValidationOptions
+  });
+
+  function StorybookProvider({ children }) {
+    return (
+      <Provider client={graphqlClient}>
+        <ApolloHooksProvider client={graphqlClient}>
+          {children}
+        </ApolloHooksProvider>
+      </Provider>
+    );
+  }
+
+  return story => {
+    return <StorybookProvider>{story()}</StorybookProvider>;
+  };
+
+}
+
+addDecorator(
+  apolloStorybookDecorator(graphqlOptions)
+);
+
+const basicTheme = create({
+  base: 'light',
+  brandTitle: '@built/react',
+  brandUrl: 'https://github.com/BuiltTechnologies/react-components',
+  brandImage: null,
+});
+
+addParameters({
+  options: {
+    showPanel: true,
+    panelPosition: 'right',
+    theme: basicTheme,
+    // theme: themes.dark,
+  },
+  readme: {
+    // You can set the global code theme here.
+    codeTheme: 'github',
+    // You can exclude prop tables globally here.
+    excludePropTables: [],
+  },
+});
+
+addDecorator(addReadme);
+addDecorator(withKnobs);
+
+function RouterDecorator(storyFn) {
+  return (
+    <Router>{storyFn()}</Router>
+  );
+}
+
+const stories = [
+  {{#components}}
+  () => {
+
+    let readme;
+    {{#if readme}}
+      readme = {{{readme}}};
+    {{/if}}
+
+    let info;
+    {{#if info}}
+      info = {{{info}}};
+    {{/if}}
+
+    let propsTableString;
+    {{#if docs}}
+      propsTableString = `{{{docs}}}`;
+    {{/if}}
+
+    let story = require('{{stories}}').default;
+    story = _.orderBy(story, ['name', 'desc']);
+    story.forEach(({
+      name: label,
+      component: story,
+      ...options,
+    }) => {
+      options.host = options.host || {};
+      options.host.title = label;
+      _.defaults(options.host, {
+        cropMarks: false,
+        width: '100%',
+        padding: '12px',
+        backdrop: '#eff0f4',
+      });
+      let params;
+
+      if (readme) {
+        if (options.readme) {
+          options.readme = `${readme.content}
+${options.readme}`;
+        } else {
+          options.readme = readme.content;
+        }
+      }
+
+      if (options.readme && propsTableString) {
+        options.readme += propsTableString;
+      } else if (propsTableString) {
+        options.readme = propsTableString;
+      }
+      if (options.readme) {
+        const { readme } = options;
+        delete options.readme;
+        params = {
+          readme: {
+            sidebar: s.dedent(readme)
+          }
+        };
+      }
+      if (params) {
+        storiesOf(`{{#if category}}{{category}}|{{/if}}{{name}}`, module)
+          .addDecorator(RouterDecorator)
+          .addParameters(params)
+          .addDecorator(host(options.host))
+          .add(label, story, options);
+      } else {
+        storiesOf(`{{#if category}}{{category}}|{{/if}}{{name}}`, module)
+          .addDecorator(RouterDecorator)
+          .addDecorator(host(options.host))
+          .add(label, story, options);
+      }
+
+    });
+  },
+  {{/components}}
+];
+
+function loadStories() {
+  for (const story of stories) {
+    story();
+  }
+}
+
+configure(loadStories, module);

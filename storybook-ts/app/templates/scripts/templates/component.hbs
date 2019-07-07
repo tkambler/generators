@@ -1,0 +1,38 @@
+# {{info.formattedDisplayName}}
+
+{{info.description}}
+
+## Props
+
+{{#if info.props}}
+
+<table>
+    <tbody>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Required</th>
+            <th>Default</th>
+            <th>Description</th>
+        </tr>
+        {{#each info.props}}
+        <tr>
+            <td>{{@key}}</td>
+            <td>{{type.name}}</td>
+            <td>{{required}}</td>
+            <td>
+                {{#if defaultValue.value}}{{defaultValue.value}}{{else}}-{{/if}}
+            </td>
+            <td>
+                {{#if description}}{{{description}}}{{else}}-{{/if}}
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+{{else}}
+
+No props have been defined.
+
+{{/if}}

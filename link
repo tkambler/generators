@@ -6,6 +6,7 @@ const { spawn } = require('child_process');
 const generators = [
     'react',
     'react-ts',
+    'storybook-ts',
 ];
 
 const spawnPromise = (cmd, args = [], options = {}) => {

@@ -1,0 +1,4 @@
+components:
+  - name: HelloWorld
+    path: components/hello-world
+    storybook: true

@@ -1,0 +1,46 @@
+@import "./variables";
+@import "../node_modules/npm-font-open-sans/open-sans.scss";
+
+* {
+  box-sizing: border-box;
+  text-rendering: optimizeLegibility;
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  min-height: 100%;
+  max-height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  min-height: 100%;
+  max-height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+  align-content: stretch;
+  font-family: $font-family-primary;
+  font-size: $global-font-size;
+  background-color: $global-page-background-color;
+  line-height: $global-line-height;
+}
+
+#app-root {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+  align-content: stretch;
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+}
